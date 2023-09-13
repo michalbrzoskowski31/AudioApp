@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Window
-//import "Background"
 
 Window {
     width: 640
@@ -10,15 +9,26 @@ Window {
     color: "blue"
 
     Background {
+        id: bg
+        DropField {
 
-        Text {
-            text: "Hello World!"
-            color: "white"
-            anchors.centerIn: parent
-            font {
-                pointSize: 40
-                bold: true
-            }
+        }
+    }
+
+    Rectangle {
+        x: 10; y: 10
+        width: 20; height: 20
+        color: "red"
+
+        Drag.active: dragArea.drag.active
+        Drag.hotSpot.x: 10
+        Drag.hotSpot.y: 10
+
+        MouseArea {
+            id: dragArea
+            anchors.fill: parent
+
+            drag.target: parent
         }
     }
 }
