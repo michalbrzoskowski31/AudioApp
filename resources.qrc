@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/img">
+        <file alias="/style">img/image.png</file>
+    </qresource>
+    <qresource prefix="/qml">
+        <file>Background.qml</file>
+        <file>DropField.qml</file>
+        <file>Main.qml</file>
+    </qresource>
+</RCC>

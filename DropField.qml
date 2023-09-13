@@ -14,6 +14,13 @@ DropArea {
             color: "white"
             width: 1
         }
+        Text {
+            text: "Drag & Drop"
+            color: "white"
+            anchors.centerIn: parent
+            font.pointSize: 30
+            font.family: "Cascadia Mono"
+        }
 
         //visible: parent.containsDrag
 

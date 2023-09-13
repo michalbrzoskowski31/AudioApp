@@ -12,13 +12,13 @@ set(CMAKE_AUTORCC ON) # Jak tego nie ma to się obrazki nie wczytują :(
 
 qt_add_executable(appAudioApp
     main.cpp
-    assets.qrc
+    resources.qrc
 )
 
 qt_add_qml_module(appAudioApp
     URI AudioApp
     VERSION 1.0
-    RESOURCES assets.qrc
+    RESOURCES resources.qrc
     QML_FILES Main.qml
     QML_FILES Background.qml
     QML_FILES DropField.qml
