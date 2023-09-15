@@ -1,8 +1,9 @@
 import QtQuick
+import "DefaultTheme.js" as DefaultTheme
 
 Rectangle {
     id: bg
     width: parent.width; height: parent.height
-    color: "#16161D"
+    color: DefaultTheme.bgColor
     anchors.fill: parent
 }

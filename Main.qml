@@ -1,5 +1,9 @@
 import QtQuick
 import QtQuick.Window
+import QtQuick.Dialogs
+import QtQuick.Controls
+
+import "DefaultTheme.js" as DefaultTheme
 
 Window {
     width: 640
@@ -8,10 +12,37 @@ Window {
     title: qsTr("Audio App")
     color: "blue"
 
+    FileDialog {
+        id: filedialog
+        title: "Choose the file"
+        visible: false
+
+        onAccepted: {
+            // Wykonaj akcje po zaakceptowaniu wybranego pliku
+            console.log("Wybrany plik:", fileUrl)
+        }
+
+        onRejected: {
+            // Wykonaj akcje po odrzuceniu wyboru pliku
+            console.log("Wybór pliku został odrzucony")
+        }
+    }
+
     Background {
         id: bg
-        DropField {
+        Button_m {
+            text: "test"
+            onClicked: {
+                filedialog.open()
+            }
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+            }
+        }
 
+        DropField {
+            id: df
         }
     }
 
