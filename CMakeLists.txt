@@ -22,6 +22,9 @@ qt_add_qml_module(appAudioApp
     QML_FILES Main.qml
     QML_FILES Background.qml
     QML_FILES DropField.qml
+    SOURCES filehandler.h filehandler.cpp
+    QML_FILES Button_m.qml
+    QML_FILES DefaultTheme.js
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
