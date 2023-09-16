@@ -11,5 +11,5 @@ Rectangle {
     }
 
     height: 60//parent.height / 8
-    color: DefaultTheme.bottomBar
+    color: DefaultTheme.barColor
 }

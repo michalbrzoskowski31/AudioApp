@@ -10,4 +10,4 @@ var textColor = "#C3C3DB";
 
 var borderColor = "#C3C3DB";
 
-var bottomBar = "#9393AD";
+var barColor = "#2E2E4A";
