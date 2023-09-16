@@ -13,6 +13,7 @@ Rectangle {
         color: "white"
         width: 1
     }
+
     Text {
         text: "Drag & Drop"
         color: DefaultTheme.textColor
@@ -28,31 +29,33 @@ Rectangle {
             fill: parent
         }
 
-        onEntered: {
-            console.log("Plik został przeciągnięty na obszar")
+        function changeColor(targetColor)
+        {
             var colorAnimation = Qt.createQmlObject('import QtQuick 2.0; ColorAnimation {}', dropArea)
             colorAnimation.target = rec
             colorAnimation.property = "color"
-            colorAnimation.to = DefaultTheme.fgUpColor
+            colorAnimation.to = targetColor
             colorAnimation.duration = 200
             colorAnimation.start()
+        }
+
+        onEntered: (drag) => {
+            console.log("Plik został przeciągnięty na obszar")
+            changeColor(DefaultTheme.fgUpColor)
+            drag.accept(Qt.CopyAction)
         }
 
         onExited: {
             console.log("Plik został opuszczony z obszaru")
-            var colorAnimation = Qt.createQmlObject('import QtQuick 2.0; ColorAnimation {}', dropArea)
-            colorAnimation.target = rec
-            colorAnimation.property = "color"
-            colorAnimation.to = DefaultTheme.bgColor
-            colorAnimation.duration = 200
-            colorAnimation.start()
+            changeColor(DefaultTheme.bgColor)
         }
 
-        onDropped: {
+        onDropped: (drop) => {
             console.log("Plik został upuszczony na obszar")
-            if (drag.mimeData) {
-                console.log(drag.mimeData)
-            }
+            console.log(drop.urls)
+
+            var filePath = file.getFilePath(drop.urls);
+            file.copyFile(filePath);
         }
     }
 }
