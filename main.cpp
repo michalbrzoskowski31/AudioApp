@@ -1,10 +1,14 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "filehandler.h"
+
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    qmlRegisterType<FileHandler> ("FileHandler", 1, 0, "File");
 
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/AudioApp/Main.qml"_qs);

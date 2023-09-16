@@ -4,6 +4,7 @@ import QtQuick.Dialogs
 import QtQuick.Controls
 
 import "DefaultTheme.js" as DefaultTheme
+import FileHandler
 
 Window {
     width: 640
@@ -11,6 +12,10 @@ Window {
     visible: true
     title: qsTr("Audio App")
     color: "blue"
+
+    File {
+        id: file
+    }
 
     FileDialog {
         id: filedialog
@@ -31,6 +36,7 @@ Window {
     Background {
         id: bg
         Button_m {
+            id: fdBUtton
             text: "test"
             onClicked: {
                 filedialog.open()
@@ -38,6 +44,7 @@ Window {
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 top: parent.top
+                topMargin: 5
             }
         }
 
