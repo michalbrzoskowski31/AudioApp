@@ -2,16 +2,19 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Dialogs
 import QtQuick.Controls
+import QtQuick.Layouts
 
 import "DefaultTheme.js" as DefaultTheme
+//import "/screens"
 import FileHandler
 
 Window {
+    id: root
     width: 640
     height: 480
     visible: true
     title: qsTr("Audio App")
-    color: "blue"
+    //color: "transparent"
 
     File {
         id: file
@@ -35,38 +38,22 @@ Window {
 
     Background {
         id: bg
-        Button_m {
-            id: fdBUtton
-            text: "test"
-            onClicked: {
-                filedialog.open()
-            }
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                top: parent.top
-                topMargin: 5
-            }
-        }
-
-        DropField {
-            id: df
-        }
     }
 
-    Rectangle {
-        x: 10; y: 10
-        width: 20; height: 20
-        color: "red"
+    TopBar {
+        id: topBar
+    }
 
-        Drag.active: dragArea.drag.active
-        Drag.hotSpot.x: 10
-        Drag.hotSpot.y: 10
 
-        MouseArea {
-            id: dragArea
-            anchors.fill: parent
-
-            drag.target: parent
+    StackView {
+        id: stackView
+        anchors {
+            top: topBar.bottom
+            left: bg.left
+            right: bg.right
+            bottom: bg.bottom
         }
+
+        initialItem: "DragAndDrop_screen.qml"
     }
 }

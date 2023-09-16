@@ -10,7 +10,10 @@ FileHandler::FileHandler(QObject *parent)
 
 FileHandler::~FileHandler()
 {
-
+    if(this->musicFile.exists())
+    {
+        QFile::remove(this->musicFile.fileName());
+    }
 }
 
 int FileHandler::copyFile(QString filePath)
@@ -60,5 +63,3 @@ QString FileHandler::getFilePath(QString url)
 
     return filePath;
 }
-
-

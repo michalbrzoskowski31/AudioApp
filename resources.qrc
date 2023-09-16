@@ -7,8 +7,14 @@
         <file>DropField.qml</file>
         <file>Main.qml</file>
         <file>Button_m.qml</file>
+        <file>BottomBar.qml</file>
+        <file>TopBar.qml</file>
+        <file>DragAndDrop_screen.qml</file>
     </qresource>
     <qresource prefix="/themes">
         <file>DefaultTheme.js</file>
+    </qresource>
+    <qresource prefix="/screens">
+        <file>Main_screen.qml</file>
     </qresource>
 </RCC>

@@ -5,8 +5,8 @@ import "DefaultTheme.js" as DefaultTheme
 
 Rectangle {
     id: rec
-    width: 0.8 * parent.width; height: 0.8 * parent.height
-    anchors.centerIn: parent
+    width: 0.8 * dragAndDropScreen.width; height: 0.8 * dragAndDropScreen.height
+    anchors.centerIn: dragAndDropScreen
     color: DefaultTheme.bgColor
 
     border {
@@ -54,8 +54,12 @@ Rectangle {
             console.log("Plik został upuszczony na obszar")
             console.log(drop.urls)
 
+            filedialog.close()
+
             var filePath = file.getFilePath(drop.urls);
             file.copyFile(filePath);
+
+            stackView.push("Main_screen.qml")
         }
     }
 }
