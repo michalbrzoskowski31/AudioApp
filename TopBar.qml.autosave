@@ -40,10 +40,8 @@ Rectangle {
             id: next
             text: ">"
             onClicked: {
-                if(stackView.currentItem.source !== "Main_screen.qml")
-                {
-                    stackView.push("Main_screen.qml")
-                }
+        
+                stackView.push("Main_screen.qml")
             }
             Layout.alignment: Qt.AlignRight
         }
