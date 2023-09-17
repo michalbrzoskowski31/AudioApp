@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/img">
-        <file alias="/style">img/image.png</file>
+        <file>img/image.png</file>
     </qresource>
     <qresource prefix="/qml">
         <file>Background.qml</file>
@@ -16,5 +16,6 @@
     </qresource>
     <qresource prefix="/screens">
         <file>Main_screen.qml</file>
+        <file>DragAndDrop_screen.qml</file>
     </qresource>
 </RCC>

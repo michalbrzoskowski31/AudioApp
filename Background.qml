@@ -3,7 +3,7 @@ import "DefaultTheme.js" as DefaultTheme
 
 Rectangle {
     id: bg
-    width: parent.width; height: parent.height
+    width: root.width; height: root.height
     color: DefaultTheme.bgColor
     anchors.fill: parent
 }

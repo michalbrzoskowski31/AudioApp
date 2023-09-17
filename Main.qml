@@ -10,8 +10,10 @@ import FileHandler
 
 Window {
     id: root
-    width: 640
+    width: 700
+    minimumWidth: 700
     height: 480
+    minimumHeight: 480
     visible: true
     title: qsTr("Audio App")
     //color: "transparent"

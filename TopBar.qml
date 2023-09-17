@@ -20,6 +20,8 @@ Rectangle {
 
         Button_m {
             id: prev
+            implicitWidth: 100
+            implicitHeight: 40
             text: "<"
             onClicked: {
                 stackView.pop()
@@ -29,6 +31,8 @@ Rectangle {
 
         Button_m {
             id: fdBUtton
+            implicitWidth: 100
+            implicitHeight: 40
             text: "Browse files"
             onClicked: {
                 filedialog.open()
@@ -38,12 +42,12 @@ Rectangle {
 
         Button_m {
             id: next
+            implicitWidth: 100
+            implicitHeight: 40
             text: ">"
             onClicked: {
-                if(stackView.currentItem.source !== "Main_screen.qml")
-                {
-                    stackView.push("Main_screen.qml")
-                }
+        
+                stackView.push("Main_screen.qml")
             }
             Layout.alignment: Qt.AlignRight
         }
