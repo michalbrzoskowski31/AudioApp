@@ -20,8 +20,8 @@ Button {
     }
 
     background: Rectangle {
-        implicitWidth: 100
-        implicitHeight: 40
+        //implicitWidth: 100
+        //implicitHeight: 40
         opacity: enabled ? 1 : 0.3
         color: hovered ? DefaultTheme.fgUpColor : DefaultTheme.fgDownColor
         border.color: control.down ? DefaultTheme.fgUpColor : DefaultTheme.borderColor

@@ -4,9 +4,6 @@ import QtQuick.Layouts
 
 Item {
     id: dragAndDropScreen
-    anchors {
-        fill: parent
-    }
 
     DropField {
         id: df
