@@ -1,21 +1,14 @@
 <RCC>
-    <qresource prefix="/img">
-        <file>img/image.png</file>
-    </qresource>
     <qresource prefix="/qml">
-        <file>Background.qml</file>
-        <file>DropField.qml</file>
-        <file>Main.qml</file>
-        <file>Button_m.qml</file>
-        <file>BottomBar.qml</file>
-        <file>TopBar.qml</file>
-        <file>DragAndDrop_screen.qml</file>
-    </qresource>
-    <qresource prefix="/themes">
-        <file>DefaultTheme.js</file>
-    </qresource>
-    <qresource prefix="/screens">
-        <file>Main_screen.qml</file>
-        <file>DragAndDrop_screen.qml</file>
+        <file>ui/Background.qml</file>
+        <file>ui/Main.qml</file>
+        <file>ui/TopBar.qml</file>
+        <file>ui/screens/Main/BottomBar.qml</file>
+        <file>ui/screens/DragAndDrop/DragAndDrop_screen.qml</file>
+        <file>ui/screens/DragAndDrop/DropField.qml</file>
+        <file>ui/screens/Main/Main_screen.qml</file>
+        <file>ui/styles/Button_m.qml</file>
+        <file>ui/themes/DefaultTheme.js</file>
+        <file>ui/assets/img/image.png</file>
     </qresource>
 </RCC>

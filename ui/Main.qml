@@ -4,8 +4,14 @@ import QtQuick.Dialogs
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "DefaultTheme.js" as DefaultTheme
-//import "/screens"
+import "qrc:/qml/ui/themes/DefaultTheme.js" as DefaultTheme
+
+import "assets/"
+import "screens/"
+import "styles/"
+import "themes/"
+import "./"
+
 import FileHandler
 
 Window {
@@ -56,6 +62,6 @@ Window {
             bottom: bg.bottom
         }
 
-        initialItem: "DragAndDrop_screen.qml"
+        initialItem: "qrc:/qml/ui/screens/DragAndDrop/DragAndDrop_screen.qml"
     }
 }

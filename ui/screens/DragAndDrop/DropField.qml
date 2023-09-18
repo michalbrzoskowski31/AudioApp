@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 
-import "DefaultTheme.js" as DefaultTheme
+import "qrc:/qml/ui/themes/DefaultTheme.js" as DefaultTheme
 
 Rectangle {
     id: rec
@@ -59,7 +59,7 @@ Rectangle {
             var filePath = file.getFilePath(drop.urls);
             file.copyFile(filePath);
 
-            stackView.push("Main_screen.qml")
+            stackView.push("qrc:/qml/ui/screens/Main/Main_screen.qml")
         }
     }
 }

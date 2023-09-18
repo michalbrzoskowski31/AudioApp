@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<FileHandler> ("FileHandler", 1, 0, "File");
 
     QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:/AudioApp/Main.qml"_qs);
+    const QUrl url(u"qrc:/qml/ui/Main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
         &app, []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);

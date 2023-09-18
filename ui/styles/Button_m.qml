@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls.Imagine
 
-import "DefaultTheme.js" as DefaultTheme
+import "qrc:/qml/ui/themes/DefaultTheme.js" as DefaultTheme
 
 
 Button {
