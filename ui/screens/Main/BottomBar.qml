@@ -2,7 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "DefaultTheme.js" as DefaultTheme
+import "qrc:/qml/ui/themes/DefaultTheme.js" as DefaultTheme
+
+import "qrc:/qml/ui/styles/"
 
 Item {
     id: bottomBar

@@ -1,5 +1,5 @@
 import QtQuick
-import "DefaultTheme.js" as DefaultTheme
+import "themes/DefaultTheme.js" as DefaultTheme
 
 Rectangle {
     id: bg

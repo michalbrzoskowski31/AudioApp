@@ -2,7 +2,9 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
-import "DefaultTheme.js" as DefaultTheme
+import "qrc:/qml/ui/themes/DefaultTheme.js" as DefaultTheme
+
+import "styles/"
 
 Rectangle {
     id: topBar
@@ -47,7 +49,7 @@ Rectangle {
             text: ">"
             onClicked: {
         
-                stackView.push("Main_screen.qml")
+                stackView.push("qrc:/qml/ui/screens/Main/Main_screen.qml")
             }
             Layout.alignment: Qt.AlignRight
         }
