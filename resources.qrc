@@ -10,5 +10,12 @@
         <file>ui/styles/Button_m.qml</file>
         <file>ui/themes/DefaultTheme.js</file>
         <file>ui/assets/img/image.png</file>
+        <file>ui/styles/RoundButton_m.qml</file>
+        <file>ui/assets/pause.png</file>
+        <file>ui/assets/play.png</file>
+        <file>ui/assets/minus.png</file>
+        <file>ui/assets/next.png</file>
+        <file>ui/assets/plus.png</file>
+        <file>ui/assets/prev.png</file>
     </qresource>
 </RCC>

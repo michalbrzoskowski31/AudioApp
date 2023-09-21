@@ -4,9 +4,10 @@ import QtQuick.Controls.Imagine
 import "qrc:/qml/ui/themes/DefaultTheme.js" as DefaultTheme
 
 
-Button {
+RoundButton {
     id: control
-    text: qsTr("Button")
+    property bool isPlaying
+    //text: qsTr("Button")
     //hoverEnabled: true
 
     contentItem: Text {
@@ -16,17 +17,17 @@ Button {
         color: "red"//DefaultTheme.textColor
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        elide: Text.ElideRight
+        //elide: Text.ElideRight
     }
 
     background: Rectangle {
-        //implicitWidth: 100
+        //implicitWidth: 40
         //implicitHeight: 40
         opacity: enabled ? 1 : 0.3
         color: hovered ? DefaultTheme.fgUpColor : DefaultTheme.fgDownColor
         border.color: control.down ? DefaultTheme.fgUpColor : DefaultTheme.borderColor
         border.width: 2
-        radius: 2
+        radius: 360
     }
 
 }

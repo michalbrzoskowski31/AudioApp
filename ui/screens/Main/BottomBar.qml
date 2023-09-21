@@ -4,7 +4,7 @@ import QtQuick.Layouts
 
 import "qrc:/qml/ui/themes/DefaultTheme.js" as DefaultTheme
 
-import "qrc:/qml/ui/styles/"
+import "../../styles/"
 
 Item {
     id: bottomBar
@@ -66,25 +66,58 @@ Item {
             Layout.alignment: Qt.AlignHCenter
 
             RowLayout {
+                //spacing: 20
                 Button_m {
                     id: random
                     implicitWidth: 50
                     text: qsTr("random")
                 }
-                Button_m {
+                Item {
                     id: prev
-                    implicitWidth: 50
-                    text: qsTr("prev")
+                    width: 48; height: 48
+                    Image {
+                        source: "qrc:/qml/ui/assets/prev.png"
+                        anchors.centerIn: parent
+                        antialiasing: true
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("prev clicked")
+                        }
+                    }
                 }
                 RoundButton {
                     id: pause_play
+                    property bool isPlaying: true
+                    spacing: 100
                     //implicitWidth: 50
-                    text: qsTr(">/||")
+                    //text: qsTr(">/||")
+                    Image {
+                        source: pause_play.isPlaying ? "qrc:/qml/ui/assets/play.png" : "qrc:/qml/ui/assets/pause.png"
+                        anchors.centerIn: parent
+                        antialiasing: true
+                        scale: 0.8
+                    }
+                    onClicked: {
+                        console.log("play clicked")
+                        pause_play.isPlaying = !pause_play.isPlaying
+                    }
                 }
-                Button_m {
+                Item {
                     id: next
-                    implicitWidth: 50
-                    text: qsTr("next")
+                    width: 48; height: 48
+                    Image {
+                        source: "qrc:/qml/ui/assets/next.png"
+                        anchors.centerIn: parent
+                        antialiasing: true
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("next clicked")
+                        }
+                    }
                 }
                 Button_m {
                     id: loop
