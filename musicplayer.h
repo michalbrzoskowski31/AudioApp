@@ -6,6 +6,16 @@
 #include <QMediaMetaData>
 #include <QAudioOutput>
 
+//filehandler begin
+#include <QString>
+#include <QUrl>
+#include <QDir>
+#include <QFileInfo>
+#include <QCoreApplication>
+#include <QFile>
+#include <QPointer>
+//filehandler end
+
 class MusicPlayer : public QObject
 {
     Q_OBJECT
@@ -28,6 +38,13 @@ public:
     Q_INVOKABLE void pause();
     Q_INVOKABLE void check();
 
+    //filehandler begin
+    Q_INVOKABLE int copyFile(QString filePath);
+    Q_INVOKABLE QString getFilePath(QString url);
+    Q_INVOKABLE QString getMusicFilePath();
+    //Q_INVOKABLE void check();
+    //filehandler end
+
 private:
     QMediaPlayer *player;
     QAudioOutput *audioOutput;
@@ -35,6 +52,14 @@ private:
 
     QString m_title;
     QUrl m_source;
+
+    //filehandler begin
+    int initFolders(QDir root);
+    QDir exePath = QCoreApplication::applicationDirPath();
+    QDir tempDirPath;
+    QFile musicFile;
+    QString musicFilePath;
+    //filehandler end
 
 signals:
     void titleChanged();

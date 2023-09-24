@@ -5,6 +5,7 @@
 MusicPlayer::MusicPlayer(QObject *parent)
     : QObject{parent}
 {
+    initFolders(exePath);
     player = new QMediaPlayer;
     audioOutput = new QAudioOutput;
 }
@@ -15,6 +16,15 @@ MusicPlayer::~MusicPlayer()
     //this->player->setSource(QUrl());
     delete this->player;
     delete this->audioOutput;
+
+    if(this->musicFile.exists())
+    {
+        this->musicFile.close();
+        if(QFile::remove(this->musicFile.fileName()))
+        {
+            qDebug() << "music file deleted";
+        }
+    }
 }
 
 QString MusicPlayer::title() const
@@ -73,3 +83,67 @@ void MusicPlayer::check()
     qDebug() << "Source: " << this->player->source();
     qDebug() << "ERRORS: " << this->player->errorString();
 }
+
+//filehandler begin
+int MusicPlayer::copyFile(QString filePath)
+{
+    QFileInfo fileInfo(filePath);
+    //QString tempFilePath = QString(this->tempDirPath.absolutePath()) + "/" + fileInfo.fileName();
+    musicFilePath = this->tempDirPath.absoluteFilePath(fileInfo.fileName());
+
+    qDebug() << "Temporary file path: " << musicFilePath;
+
+    QFile sourceFile(filePath);
+    if(sourceFile.copy(musicFilePath))
+    {
+        this->musicFile.setFileName(musicFilePath);
+        this->setSource_m(this->musicFilePath);
+        return 0;
+    }
+    return 1;
+}
+
+int MusicPlayer::initFolders(QDir root)
+{
+    QString tempFolderName{".temp"};
+
+    if(root.exists(tempFolderName))
+    {
+        //qWarning() << "Folder Already Exist";
+        this->tempDirPath = QDir(tempFolderName);
+        return 0;
+    }
+
+    if(root.mkdir(tempFolderName))
+    {
+        this->tempDirPath = QDir(tempFolderName);
+        qInfo() << "Directory created: " << tempDirPath.absolutePath();
+        return 0;
+    }
+    return 1;
+}
+
+QString MusicPlayer::getFilePath(QString url)
+{
+    qDebug() << "URL: " << url;
+    QUrl realUrl = QUrl::fromUserInput(url);
+    QString filePath = realUrl.toLocalFile();
+    qDebug() << "File path: " << filePath;
+    qDebug() << QDir::currentPath();
+
+    return filePath;
+}
+
+QString MusicPlayer::getMusicFilePath()
+{
+    return this->musicFilePath;
+}
+
+//void MusicPlayer::check()
+//{
+//    qDebug() << "musicFile.fileName(): " << this->musicFile.fileName();
+//    qDebug() << "musicFilePath: " << this->musicFilePath;
+//    qDebug() << "tempDirPath: " << this->tempDirPath;
+//    qDebug() << "exePath: " << this->exePath;
+//}
+//filehandler end

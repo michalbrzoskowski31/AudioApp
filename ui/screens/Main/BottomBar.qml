@@ -102,7 +102,7 @@ Item {
                     onClicked: {
                         console.log("play clicked")
                         pause_play.isPlaying = !pause_play.isPlaying
-                        pause_play.isPlaying == true ? mediaPlayer.pause() : mediaPlayer.play()
+                        pause_play.isPlaying == true ? musicPlayer.pause() : musicPlayer.play()
                         //mediaPlayer.check();
                     }
                 }

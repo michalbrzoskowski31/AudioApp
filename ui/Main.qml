@@ -12,7 +12,6 @@ import "styles/"
 import "themes/"
 import "./"
 
-import FileHandler
 import MusicPlayer
 
 Window {
@@ -25,8 +24,8 @@ Window {
     title: qsTr("Audio App")
     //color: "transparent"
 
-    File {
-        id: file
+    MusicPlayer {
+        id: musicPlayer
     }
 
     FileDialog {

@@ -21,8 +21,8 @@ qt_add_qml_module(appAudioApp
     URI AudioApp
     VERSION 1.0
     RESOURCES resources.qrc
-    SOURCES filehandler.h filehandler.cpp
-    SOURCES filehandler.cpp filehandler.h main.cpp
+    SOURCES
+    SOURCES main.cpp
     RESOURCES ui/assets/img/image.png CMakeLists.txt README.md resources.qrc
     QML_FILES ui/screens/DragAndDrop/DragAndDrop_screen.qml ui/screens/DragAndDrop/DropField.qml ui/screens/Main/Main_screen.qml ui/styles/Button_m.qml ui/themes/DefaultTheme.js ui/Background.qml ui/Main.qml ui/TopBar.qml
     QML_FILES ui/screens/Main/BottomBar.qml
