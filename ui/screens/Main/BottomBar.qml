@@ -102,6 +102,8 @@ Item {
                     onClicked: {
                         console.log("play clicked")
                         pause_play.isPlaying = !pause_play.isPlaying
+                        pause_play.isPlaying == true ? mediaPlayer.pause() : mediaPlayer.play()
+                        //mediaPlayer.check();
                     }
                 }
                 Item {
@@ -124,6 +126,10 @@ Item {
                     implicitWidth: 50
                     text: qsTr("loop")
                 }
+            }
+            Slider {
+                id: progres
+                width: 500 // tu skończyłem
             }
         }
 

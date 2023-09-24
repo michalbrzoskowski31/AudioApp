@@ -13,6 +13,7 @@ import "themes/"
 import "./"
 
 import FileHandler
+import MusicPlayer
 
 Window {
     id: root

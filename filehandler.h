@@ -9,6 +9,9 @@
 #include <QCoreApplication>
 #include <QFile>
 #include <QPointer>
+#include <QMediaPlayer>
+#include <QMediaMetaData>
+//#include <QMediaPlayerControl>
 
 class FileHandler : public QObject
 {
@@ -18,17 +21,22 @@ public:
     ~FileHandler();
 
     Q_INVOKABLE int copyFile(QString filePath);
+    Q_INVOKABLE QString getFilePath(QString url);
+    Q_INVOKABLE QString getMusicFilePath();
+    Q_INVOKABLE void check();
 
 private:
     int initFolders(QDir root);
     QDir exePath = QCoreApplication::applicationDirPath();
     QDir tempDirPath;
     QFile musicFile;
+    QString musicFilePath;
 
 signals:
 
+
 public slots:
-    QString getFilePath(QString url);
+
 };
 
 #endif // FILEHANDLER_H

@@ -27,6 +27,7 @@ qt_add_qml_module(appAudioApp
     QML_FILES ui/screens/DragAndDrop/DragAndDrop_screen.qml ui/screens/DragAndDrop/DropField.qml ui/screens/Main/Main_screen.qml ui/styles/Button_m.qml ui/themes/DefaultTheme.js ui/Background.qml ui/Main.qml ui/TopBar.qml
     QML_FILES ui/screens/Main/BottomBar.qml
     QML_FILES ui/styles/RoundButton_m.qml
+    SOURCES musicplayer.h musicplayer.cpp
 
 )
 
@@ -40,6 +41,9 @@ set_target_properties(appAudioApp PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
+
+find_package(Qt6 REQUIRED COMPONENTS Multimedia)
+target_link_libraries(appAudioApp PRIVATE Qt6::Multimedia)
 
 target_link_libraries(appAudioApp
     PRIVATE Qt6::Quick

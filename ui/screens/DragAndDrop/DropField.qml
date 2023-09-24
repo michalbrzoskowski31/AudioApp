@@ -57,7 +57,9 @@ Rectangle {
             filedialog.close()
 
             var filePath = file.getFilePath(drop.urls);
+            console.log("FILE PATH QML: " + filePath)
             file.copyFile(filePath);
+            //file.check();
 
             stackView.push("qrc:/qml/ui/screens/Main/Main_screen.qml")
         }

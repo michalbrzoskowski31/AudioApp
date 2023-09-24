@@ -1,5 +1,6 @@
 #include "filehandler.h"
 #include <QDebug>
+#include <QString>
 
 
 FileHandler::FileHandler(QObject *parent)
@@ -12,7 +13,11 @@ FileHandler::~FileHandler()
 {
     if(this->musicFile.exists())
     {
-        QFile::remove(this->musicFile.fileName());
+        this->musicFile.close();
+        if(QFile::remove(this->musicFile.fileName()))
+        {
+            qDebug() << "music file deleted";
+        }
     }
 }
 
@@ -20,14 +25,14 @@ int FileHandler::copyFile(QString filePath)
 {
     QFileInfo fileInfo(filePath);
     //QString tempFilePath = QString(this->tempDirPath.absolutePath()) + "/" + fileInfo.fileName();
-    QString tempFilePath = this->tempDirPath.absoluteFilePath(fileInfo.fileName());
+    musicFilePath = this->tempDirPath.absoluteFilePath(fileInfo.fileName());
 
-    qDebug() << "Temporary file path: " << tempFilePath;
+    qDebug() << "Temporary file path: " << musicFilePath;
 
     QFile sourceFile(filePath);
-    if(sourceFile.copy(tempFilePath))
+    if(sourceFile.copy(musicFilePath))
     {
-        this->musicFile.setFileName(tempFilePath);
+        this->musicFile.setFileName(musicFilePath);
         return 0;
     }
     return 1;
@@ -62,4 +67,17 @@ QString FileHandler::getFilePath(QString url)
     qDebug() << QDir::currentPath();
 
     return filePath;
+}
+
+QString FileHandler::getMusicFilePath()
+{
+    return this->musicFilePath;
+}
+
+void FileHandler::check()
+{
+    qDebug() << "musicFile.fileName(): " << this->musicFile.fileName();
+    qDebug() << "musicFilePath: " << this->musicFilePath;
+    qDebug() << "tempDirPath: " << this->tempDirPath;
+    qDebug() << "exePath: " << this->exePath;
 }
