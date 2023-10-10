@@ -59,7 +59,10 @@ Rectangle {
             var filePath = musicPlayer.getFilePath(drop.urls);
             console.log("FILE PATH QML: " + filePath)
             musicPlayer.copyFile(filePath);
-            //file.check();
+            musicPlayer.initFile();
+            //musicPlayer.updateInfo();
+            musicPlayer.onDropUpdateInfo();
+            musicPlayer.check();
 
             stackView.push("qrc:/qml/ui/screens/Main/Main_screen.qml")
         }

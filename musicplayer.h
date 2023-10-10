@@ -33,10 +33,16 @@ public:
     QString source() const;
     void setSource_m(const QString &newSource);
 
+    Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY authorChanged FINAL);
+
+    QString author() const;
+    void setAuthor(const QString &newAuthor);
 
     Q_INVOKABLE void play();
     Q_INVOKABLE void pause();
+    Q_INVOKABLE void onDropUpdateInfo();
     Q_INVOKABLE void check();
+    Q_INVOKABLE void initFile();
 
     //filehandler begin
     Q_INVOKABLE int copyFile(QString filePath);
@@ -45,26 +51,35 @@ public:
     //Q_INVOKABLE void check();
     //filehandler end
 
+
 private:
     QMediaPlayer *player;
     QAudioOutput *audioOutput;
 
+    QMediaMetaData metadata;
+
+    int currentDuration;
+    int totalDuration;
 
     QString m_title;
     QUrl m_source;
+    QString m_author;
 
     //filehandler begin
     int initFolders(QDir root);
+    void getMetaData();
     QDir exePath = QCoreApplication::applicationDirPath();
     QDir tempDirPath;
     QFile musicFile;
     QString musicFilePath;
     //filehandler end
 
+
 signals:
     void titleChanged();
 
     void sourceChanged();
+    void authorChanged();
 };
 
 #endif // MUSICPLAYER_H

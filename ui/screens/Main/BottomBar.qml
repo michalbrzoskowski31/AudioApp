@@ -50,7 +50,7 @@ Item {
                     color: "white"
                     font.bold: true
                     id: title
-                    text: qsTr("Automobile")
+                    text: musicPlayer.title
                 }
 
                 Text {
@@ -103,7 +103,8 @@ Item {
                         console.log("play clicked")
                         pause_play.isPlaying = !pause_play.isPlaying
                         pause_play.isPlaying == true ? musicPlayer.pause() : musicPlayer.play()
-                        //mediaPlayer.check();
+                        musicPlayer.updateInfo();
+                        musicPlayer.check();
                     }
                 }
                 Item {

@@ -8,12 +8,11 @@ MusicPlayer::MusicPlayer(QObject *parent)
     initFolders(exePath);
     player = new QMediaPlayer;
     audioOutput = new QAudioOutput;
+
 }
 
 MusicPlayer::~MusicPlayer()
 {
-    //this->player->pause();
-    //this->player->setSource(QUrl());
     delete this->player;
     delete this->audioOutput;
 
@@ -29,19 +28,17 @@ MusicPlayer::~MusicPlayer()
 
 QString MusicPlayer::title() const
 {
-    return m_title;
+    return this->m_title;
 }
 
 void MusicPlayer::setTitle(const QString &newTitle)
 {
-    if (this->player->metaData()[QMediaMetaData::Title].toString() == newTitle)
-        return;
+    this->m_title = newTitle;
 
-    //QMediaMetaData metaData;
-    //metaData.insert(QMediaMetaData::Title, QVariant(newTitle));
-    this->player->metaData().insert(QMediaMetaData::Title, QVariant(newTitle));
-
-    //this->player->metaData()[QMediaMetaData::Title] = QVariant(newTitle);
+    if(newTitle == "") {
+        QFileInfo fileinfo(this->musicFile.fileName());
+        this->m_title = fileinfo.fileName();
+    }
 
     emit titleChanged();
 }
@@ -63,25 +60,57 @@ void MusicPlayer::setSource_m(const QString &newSource)
     emit sourceChanged();
 }
 
+QString MusicPlayer::author() const
+{
+    //return m_author;
+    QString author = this->player->metaData()[QMediaMetaData::Author].toString(); // [13]
+    return author;
+}
+
+void MusicPlayer::setAuthor(const QString &newAuthor)
+{
+    if (this->player->metaData()[QMediaMetaData::Author].toString() == newAuthor)
+        return;
+
+    this->m_author = newAuthor;
+    this->player->metaData().insert(QMediaMetaData::Author, QVariant(newAuthor));
+
+    emit authorChanged();
+}
+
+
 void MusicPlayer::play()
 {
-    player->setSource(m_source);
-    player->setAudioOutput(this->audioOutput);
-    audioOutput->setVolume(20);
     this->player->play();
+
+    //this->getMetaData();
 }
 
 void MusicPlayer::pause()
 {
     this->player->pause();
-    this->player->setSource(QUrl());
+    //this->player->setSource(QUrl());
+}
+
+void MusicPlayer::onDropUpdateInfo()
+{
+    this->metadata = this->player->metaData();
+    this->setTitle(this->metadata.stringValue(QMediaMetaData::Title));
 }
 
 void MusicPlayer::check()
 {
-    qDebug() << "Title: " << this->player->metaData()[QMediaMetaData::Title];
-    qDebug() << "Source: " << this->player->source();
-    qDebug() << "ERRORS: " << this->player->errorString();
+    qDebug() << "Title: " << this->m_title;
+    qDebug() << "Source: " << this->m_source;
+    qDebug() << "Author: " << this->m_author;
+}
+
+void MusicPlayer::initFile()
+{
+    player->setSource(m_source);
+    player->setAudioOutput(this->audioOutput);
+    audioOutput->setVolume(20);
+
 }
 
 //filehandler begin
@@ -121,6 +150,14 @@ int MusicPlayer::initFolders(QDir root)
         return 0;
     }
     return 1;
+}
+
+void MusicPlayer::getMetaData()
+{
+    QMediaMetaData metadata = player->metaData();
+    QString tit = metadata.stringValue(QMediaMetaData::Title);
+    QString au = metadata.stringValue(QMediaMetaData::ContributingArtist);
+    qDebug() << "IMPORTANT: " << tit << " " << au;
 }
 
 QString MusicPlayer::getFilePath(QString url)
