@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 import "qrc:/qml/ui/themes/DefaultTheme.js" as DefaultTheme
+import "../../styles"
 
 Rectangle {
     id: rec
@@ -14,13 +16,38 @@ Rectangle {
         width: 1
     }
 
-    Text {
-        text: "Drag & Drop"
-        color: DefaultTheme.textColor
+    ColumnLayout {
+        //Layout.alignment: Qt.AlignCenter
         anchors.centerIn: parent
-        font.pointSize: 30
-        font.family: "Cascadia Mono"
+        spacing: 20
+        Text {
+            Layout.alignment: Qt.AlignCenter
+            text: "Drag & Drop"
+            color: DefaultTheme.textColor
+            //anchors.centerIn: parent
+            font.pointSize: 30
+            font.family: "Cascadia Mono"
+        }
+        Button_m {
+            text: ""
+            Layout.alignment: Qt.AlignCenter
+            Layout.preferredWidth: txt.contentWidth + 100
+            Layout.preferredHeight: txt.contentHeight + 20
+
+            onClicked: {
+                musicPlayer.deleteFile();
+            }
+
+            Text {
+                anchors.centerIn: parent
+                id: txt
+                text: "Delete File"
+                color: DefaultTheme.textColor
+            }
+        }
     }
+
+
 
     DropArea {
         id: dropArea

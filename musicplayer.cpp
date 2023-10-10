@@ -69,11 +69,7 @@ QString MusicPlayer::author() const
 
 void MusicPlayer::setAuthor(const QString &newAuthor)
 {
-    if (this->player->metaData()[QMediaMetaData::Author].toString() == newAuthor)
-        return;
-
     this->m_author = newAuthor;
-    this->player->metaData().insert(QMediaMetaData::Author, QVariant(newAuthor));
 
     emit authorChanged();
 }
@@ -94,8 +90,10 @@ void MusicPlayer::pause()
 
 void MusicPlayer::onDropUpdateInfo()
 {
+    //this->setSource_m(this->)
     this->metadata = this->player->metaData();
     this->setTitle(this->metadata.stringValue(QMediaMetaData::Title));
+    this->setAuthor(this->metadata.stringValue(QMediaMetaData::Author));
 }
 
 void MusicPlayer::check()
@@ -111,6 +109,28 @@ void MusicPlayer::initFile()
     player->setAudioOutput(this->audioOutput);
     audioOutput->setVolume(20);
 
+}
+
+void MusicPlayer::deleteFile()
+{
+    // Destructor
+    delete this->player;
+    delete this->audioOutput;
+
+    if(this->musicFile.exists())
+    {
+        this->musicFile.close();
+        if(QFile::remove(this->musicFile.fileName()))
+        {
+            qDebug() << "music file deleted";
+        }
+    }
+    // Destructor
+
+    // Constructor
+    player = new QMediaPlayer;
+    audioOutput = new QAudioOutput;
+    // Constructor
 }
 
 //filehandler begin

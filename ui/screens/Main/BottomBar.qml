@@ -56,7 +56,7 @@ Item {
                 Text {
                     color: "white"
                     id: author
-                    text: qsTr("KALEO")
+                    text: musicPlayer.author
                 }
             }
         }
@@ -103,8 +103,8 @@ Item {
                         console.log("play clicked")
                         pause_play.isPlaying = !pause_play.isPlaying
                         pause_play.isPlaying == true ? musicPlayer.pause() : musicPlayer.play()
-                        musicPlayer.updateInfo();
-                        musicPlayer.check();
+                        //musicPlayer.updateInfo();
+                        //musicPlayer.check();
                     }
                 }
                 Item {

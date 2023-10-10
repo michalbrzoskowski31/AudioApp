@@ -43,6 +43,7 @@ public:
     Q_INVOKABLE void onDropUpdateInfo();
     Q_INVOKABLE void check();
     Q_INVOKABLE void initFile();
+    Q_INVOKABLE void deleteFile();
 
     //filehandler begin
     Q_INVOKABLE int copyFile(QString filePath);
