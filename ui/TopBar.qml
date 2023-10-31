@@ -26,7 +26,11 @@ Rectangle {
             implicitHeight: 40
             text: "<"
             onClicked: {
-                stackView.pop()
+                if(musicPlayer.get_screen_isMain() === true)
+                {
+                    musicPlayer.set_screen_isMain(false);
+                    stackView.pop();
+                }
             }
             Layout.alignment: Qt.AlignLeft
         }
@@ -48,8 +52,12 @@ Rectangle {
             implicitHeight: 40
             text: ">"
             onClicked: {
-        
-                stackView.push("qrc:/qml/ui/screens/Main/Main_screen.qml")
+                if(musicPlayer.get_screen_isMain() === false)
+                {
+                    musicPlayer.set_screen_isMain(true);
+                    stackView.push("qrc:/qml/ui/screens/Main/Main_screen.qml");
+                }
+
             }
             Layout.alignment: Qt.AlignRight
         }

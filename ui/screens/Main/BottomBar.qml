@@ -89,22 +89,33 @@ Item {
                 }
                 RoundButton {
                     id: pause_play
-                    property bool isPlaying: true
+                    property bool isPlaying: musicPlayer.get_player_isPlaying()
                     spacing: 100
                     //implicitWidth: 50
                     //text: qsTr(">/||")
                     Image {
-                        source: pause_play.isPlaying ? "qrc:/qml/ui/assets/play.png" : "qrc:/qml/ui/assets/pause.png"
+                        source: !pause_play.isPlaying ? "qrc:/qml/ui/assets/play.png" : "qrc:/qml/ui/assets/pause.png"
                         anchors.centerIn: parent
                         antialiasing: true
                         scale: 0.8
                     }
                     onClicked: {
-                        console.log("play clicked")
-                        pause_play.isPlaying = !pause_play.isPlaying
-                        pause_play.isPlaying == true ? musicPlayer.pause() : musicPlayer.play()
-                        //musicPlayer.updateInfo();
-                        //musicPlayer.check();
+                        //console.log("play clicked")
+
+                        if(musicPlayer.get_player_isPlaying() === false)
+                        {
+                            console.log("play");
+                            pause_play.isPlaying = true;
+                            musicPlayer.set_player_isPlaying(true);
+                            musicPlayer.play();
+                        }
+                        else
+                        {
+                            console.log("pause");
+                            pause_play.isPlaying = false;
+                            musicPlayer.set_player_isPlaying(false);
+                            musicPlayer.pause();
+                        }
                     }
                 }
                 Item {

@@ -52,6 +52,16 @@ public:
     //Q_INVOKABLE void check();
     //filehandler end
 
+    // states control begin
+    Q_INVOKABLE bool get_file_isDropped() const;
+    Q_INVOKABLE void set_file_isDropped(bool set);
+
+    Q_INVOKABLE bool get_screen_isMain() const;
+    Q_INVOKABLE void set_screen_isMain(bool set);
+
+    Q_INVOKABLE bool get_player_isPlaying() const;
+    Q_INVOKABLE void set_player_isPlaying(bool set);
+    // states control end
 
 private:
     QMediaPlayer *player;
@@ -68,6 +78,7 @@ private:
 
     //filehandler begin
     int initFolders(QDir root);
+    void initVariables();
     void getMetaData();
     QDir exePath = QCoreApplication::applicationDirPath();
     QDir tempDirPath;
@@ -75,6 +86,11 @@ private:
     QString musicFilePath;
     //filehandler end
 
+    // states control begin
+    bool file_isDropped;
+    bool screen_isMain;
+    bool player_isPlaying;
+    // states control end
 
 signals:
     void titleChanged();

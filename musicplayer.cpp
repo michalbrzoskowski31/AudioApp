@@ -6,6 +6,7 @@ MusicPlayer::MusicPlayer(QObject *parent)
     : QObject{parent}
 {
     initFolders(exePath);
+    initVariables();
     player = new QMediaPlayer;
     audioOutput = new QAudioOutput;
 
@@ -77,6 +78,7 @@ void MusicPlayer::setAuthor(const QString &newAuthor)
 
 void MusicPlayer::play()
 {
+    this->player_isPlaying = true;
     this->player->play();
 
     //this->getMetaData();
@@ -84,8 +86,8 @@ void MusicPlayer::play()
 
 void MusicPlayer::pause()
 {
+    this->player_isPlaying = false;
     this->player->pause();
-    //this->player->setSource(QUrl());
 }
 
 void MusicPlayer::onDropUpdateInfo()
@@ -98,9 +100,7 @@ void MusicPlayer::onDropUpdateInfo()
 
 void MusicPlayer::check()
 {
-    qDebug() << "Title: " << this->m_title;
-    qDebug() << "Source: " << this->m_source;
-    qDebug() << "Author: " << this->m_author;
+    //qDebug() << "musicPlayer::check(): " << this->m_file_isDropped;
 }
 
 void MusicPlayer::initFile()
@@ -114,6 +114,7 @@ void MusicPlayer::initFile()
 void MusicPlayer::deleteFile()
 {
     // Destructor
+    this->pause();
     delete this->player;
     delete this->audioOutput;
 
@@ -172,6 +173,13 @@ int MusicPlayer::initFolders(QDir root)
     return 1;
 }
 
+void MusicPlayer::initVariables()
+{
+    this->file_isDropped = false;
+    this->screen_isMain = false;
+    this->player_isPlaying = false;
+}
+
 void MusicPlayer::getMetaData()
 {
     QMediaMetaData metadata = player->metaData();
@@ -196,11 +204,32 @@ QString MusicPlayer::getMusicFilePath()
     return this->musicFilePath;
 }
 
-//void MusicPlayer::check()
-//{
-//    qDebug() << "musicFile.fileName(): " << this->musicFile.fileName();
-//    qDebug() << "musicFilePath: " << this->musicFilePath;
-//    qDebug() << "tempDirPath: " << this->tempDirPath;
-//    qDebug() << "exePath: " << this->exePath;
-//}
-//filehandler end
+bool MusicPlayer::get_file_isDropped() const
+{
+    return this->file_isDropped;
+}
+
+void MusicPlayer::set_file_isDropped(bool set)
+{
+    this->file_isDropped = set;
+}
+
+bool MusicPlayer::get_screen_isMain() const
+{
+    return this->screen_isMain;
+}
+
+void MusicPlayer::set_screen_isMain(bool set)
+{
+    this->screen_isMain = set;
+}
+
+bool MusicPlayer::get_player_isPlaying() const
+{
+    return this->player_isPlaying;
+}
+
+void MusicPlayer::set_player_isPlaying(bool set)
+{
+    this->player_isPlaying = set;
+}

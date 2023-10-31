@@ -11,6 +11,16 @@ Rectangle {
     anchors.centerIn: dragAndDropScreen
     color: DefaultTheme.bgColor
 
+    function changeColor(targetColor)
+    {
+        var colorAnimation = Qt.createQmlObject('import QtQuick 2.0; ColorAnimation {}', dropArea)
+        colorAnimation.target = rec
+        colorAnimation.property = "color"
+        colorAnimation.to = targetColor
+        colorAnimation.duration = 200
+        colorAnimation.start()
+    }
+
     border {
         color: "white"
         width: 1
@@ -36,6 +46,8 @@ Rectangle {
 
             onClicked: {
                 musicPlayer.deleteFile();
+                musicPlayer.set_file_isDropped(false);
+                changeColor(DefaultTheme.bgColor)
             }
 
             Text {
@@ -47,8 +59,6 @@ Rectangle {
         }
     }
 
-
-
     DropArea {
         id: dropArea
         anchors {
@@ -56,20 +66,22 @@ Rectangle {
             fill: parent
         }
 
-        function changeColor(targetColor)
-        {
-            var colorAnimation = Qt.createQmlObject('import QtQuick 2.0; ColorAnimation {}', dropArea)
-            colorAnimation.target = rec
-            colorAnimation.property = "color"
-            colorAnimation.to = targetColor
-            colorAnimation.duration = 200
-            colorAnimation.start()
-        }
-
         onEntered: (drag) => {
             console.log("Plik został przeciągnięty na obszar")
             changeColor(DefaultTheme.fgUpColor)
-            drag.accept(Qt.CopyAction)
+
+            musicPlayer.check()
+
+            if(musicPlayer.get_file_isDropped() === false)
+            {
+                console.log("Plik został zaakceptowany")
+                drag.accept(Qt.CopyAction)
+            }
+            else
+            {
+                console.log("There is already a file")
+                drag.accepted = false
+            }
         }
 
         onExited: {
@@ -81,6 +93,9 @@ Rectangle {
             console.log("Plik został upuszczony na obszar")
             console.log(drop.urls)
 
+            console.log("QML TEST: " + musicPlayer.m_file_isDropped)
+            musicPlayer.check()
+
             filedialog.close()
 
             var filePath = musicPlayer.getFilePath(drop.urls);
@@ -90,7 +105,9 @@ Rectangle {
             //musicPlayer.updateInfo();
             musicPlayer.onDropUpdateInfo();
             musicPlayer.check();
+            musicPlayer.set_file_isDropped(true);
 
+            musicPlayer.set_screen_isMain(true);
             stackView.push("qrc:/qml/ui/screens/Main/Main_screen.qml")
         }
     }
