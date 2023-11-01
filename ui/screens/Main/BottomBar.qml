@@ -64,10 +64,13 @@ Item {
         ColumnLayout {
             id: player
             Layout.alignment: Qt.AlignHCenter
+            Layout.preferredWidth: (parent.width - info.width - controls.width) * 0.6
 
             RowLayout {
                 //spacing: 20
+                Layout.preferredWidth: parent.width
                 Button_m {
+                    Layout.alignment: Qt.AlignLeft
                     id: random
                     implicitWidth: 50
                     text: qsTr("random")
@@ -75,6 +78,7 @@ Item {
                 Item {
                     id: prev
                     width: 48; height: 48
+                    Layout.alignment: Qt.AlignLeft
                     Image {
                         source: "qrc:/qml/ui/assets/prev.png"
                         anchors.centerIn: parent
@@ -91,6 +95,7 @@ Item {
                     id: pause_play
                     property bool isPlaying: musicPlayer.get_player_isPlaying()
                     spacing: 100
+                    Layout.alignment: Qt.AlignHCenter
                     //implicitWidth: 50
                     //text: qsTr(">/||")
                     Image {
@@ -121,6 +126,7 @@ Item {
                 Item {
                     id: next
                     width: 48; height: 48
+                    Layout.alignment: Qt.AlignRight
                     Image {
                         source: "qrc:/qml/ui/assets/next.png"
                         anchors.centerIn: parent
@@ -134,6 +140,7 @@ Item {
                     }
                 }
                 Button_m {
+                    Layout.alignment: Qt.AlignRight
                     id: loop
                     implicitWidth: 50
                     text: qsTr("loop")
@@ -141,7 +148,18 @@ Item {
             }
             Slider {
                 id: progres
-                width: 500 // tu skończyłem
+                implicitWidth: parent.width
+                from: 0
+                to: musicPlayer.getDuration()
+                Connections {
+                    target: musicPlayer
+                    onPositionChanged: {
+                        console.log("position changed!");
+                        console.log(musicPlayer.getDuration());
+                        console.log(musicPlayer.getPosition());
+                        progres.value = musicPlayer.getPosition();
+                    }
+                }
             }
         }
 

@@ -63,6 +63,11 @@ public:
     Q_INVOKABLE void set_player_isPlaying(bool set);
     // states control end
 
+    // slider begin
+    Q_INVOKABLE qint64 getDuration();
+    Q_INVOKABLE qint64 getPosition();
+    // slider end
+
 private:
     QMediaPlayer *player;
     QAudioOutput *audioOutput;
@@ -92,11 +97,23 @@ private:
     bool player_isPlaying;
     // states control end
 
+    // slider begin
+    qint64 position;
+    qint64 duration;
+    // slider end
+
+private slots:
+    void updatePosition();
+    void updateDuration();
+
 signals:
     void titleChanged();
 
     void sourceChanged();
     void authorChanged();
+
+    void positionChanged();
+    void durationChanged();
 };
 
 #endif // MUSICPLAYER_H

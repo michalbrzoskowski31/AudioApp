@@ -10,6 +10,9 @@ MusicPlayer::MusicPlayer(QObject *parent)
     player = new QMediaPlayer;
     audioOutput = new QAudioOutput;
 
+    connect(this->player, &QMediaPlayer::positionChanged, this, &MusicPlayer::updatePosition);
+    connect(this->player, &QMediaPlayer::durationChanged, this, &MusicPlayer::updateDuration);
+
 }
 
 MusicPlayer::~MusicPlayer()
@@ -188,6 +191,18 @@ void MusicPlayer::getMetaData()
     qDebug() << "IMPORTANT: " << tit << " " << au;
 }
 
+void MusicPlayer::updatePosition()
+{
+    this->position = this->player->position();
+    emit positionChanged();
+}
+
+void MusicPlayer::updateDuration()
+{
+    this->duration = this->player->duration();
+    emit durationChanged();
+}
+
 QString MusicPlayer::getFilePath(QString url)
 {
     qDebug() << "URL: " << url;
@@ -232,4 +247,14 @@ bool MusicPlayer::get_player_isPlaying() const
 void MusicPlayer::set_player_isPlaying(bool set)
 {
     this->player_isPlaying = set;
+}
+
+qint64 MusicPlayer::getDuration()
+{
+    return this->player->duration();
+}
+
+qint64 MusicPlayer::getPosition()
+{
+    return this->player->position();
 }
