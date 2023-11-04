@@ -27,7 +27,8 @@ Item {
         RowLayout {
             id: info
             //anchors.fill: parent
-            Layout.preferredWidth: 200//root.width * 3/10
+            //Layout.preferredWidth: 200//root.width * 3/10
+            implicitWidth: 200
             Layout.alignment: Qt.AlignLeft
 
             Item {
@@ -45,18 +46,21 @@ Item {
 
             ColumnLayout {
                 id: titleAndAuthor
-
                 Text {
+                    width: 50
                     color: "white"
                     font.bold: true
                     id: title
                     text: musicPlayer.title
+                    elide: Text.ElideRight
                 }
 
                 Text {
+                    width: 50
                     color: "white"
                     id: author
                     text: musicPlayer.author
+                    elide: Text.ElideRight
                 }
             }
         }
@@ -151,6 +155,12 @@ Item {
                 implicitWidth: parent.width
                 from: 0
                 to: musicPlayer.getDuration()
+
+                onMoved: {
+                    console.log(progres.value);
+                    musicPlayer.setPosition(progres.value);
+                }
+
                 Connections {
                     target: musicPlayer
                     onPositionChanged: {
@@ -176,6 +186,15 @@ Item {
 
             Slider {
                 id: volume
+                from: 0
+                to: 100
+                value: 100
+
+                onMoved: {
+                    console.log(volume.value);
+                    var volumePercentage = volume.value / volume.to;
+                    musicPlayer.setVolume(volumePercentage);
+                }
             }
         }
     }

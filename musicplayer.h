@@ -64,8 +64,10 @@ public:
     // states control end
 
     // slider begin
-    Q_INVOKABLE qint64 getDuration();
-    Q_INVOKABLE qint64 getPosition();
+    Q_INVOKABLE qint64 getDuration() const;
+    Q_INVOKABLE qint64 getPosition() const;
+    Q_INVOKABLE void setPosition(qint64 set);
+    Q_INVOKABLE void setVolume(float set);
     // slider end
 
 private:

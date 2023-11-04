@@ -249,12 +249,22 @@ void MusicPlayer::set_player_isPlaying(bool set)
     this->player_isPlaying = set;
 }
 
-qint64 MusicPlayer::getDuration()
+qint64 MusicPlayer::getDuration() const
 {
     return this->player->duration();
 }
 
-qint64 MusicPlayer::getPosition()
+qint64 MusicPlayer::getPosition() const
 {
     return this->player->position();
+}
+
+void MusicPlayer::setPosition(qint64 set)
+{
+    this->player->setPosition(set);
+}
+
+void MusicPlayer::setVolume(float set)
+{
+    this->audioOutput->setVolume(set);
 }
